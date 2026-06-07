@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('API_URL:', process.env.API_URL); // ← añade esto
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
