@@ -60,4 +60,4 @@ typings/
 # next.js build output
 .next
 # Añádelo al .gitignore del frontend para que no vuelva a subirse
-#echo "package-lock.json" >> front_ejercicio1_garcia/.gitignore
+echo "package-lock.json" >> front_ejercicio1_garcia/.gitignore
