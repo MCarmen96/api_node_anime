@@ -1,0 +1,131 @@
+const axios = require('axios');
+
+/**
+ * Servicio para obtener personajes de la API externa.
+ * @param {number} page - Número de página.
+ * @param {number} limit - Límite de elementos.
+ * @returns {Promise<Object>} Datos de la respuesta de la API.
+ */
+
+const getCharacters = async (token, page = 1) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const response = await axios.get(`${process.env.API_URL}/api/characters?page=${page}&limit=4`, config);
+    return response.data;
+};
+const getEpisodios = async (token) => {
+
+    const url = `${process.env.API_URL}/api/episodes`;
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const response = await axios.get(url, config);
+    return response.data;
+};
+const getCharactersWithPage = async (token, page) => {
+    try{
+        const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const response = await axios.get(`${process.env.API_URL}/api/characters?page=${page}&limit=4`, config);
+    return response.data;
+    }catch(error){
+        console.error("error paginar desde index service: "+error);
+    }
+    
+
+};
+const getCharactersNameId = async (token) => {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const response = await axios.get(`h${process.env.API_URL}/api/characters`, config);
+    console.log("respuesta desde el index controller: " + response.data);
+    return response.data;
+
+};
+const getEpisodiosWithId = async (token, id) => {
+    const url = `${process.env.API_URL}/api/episodes/${id}`;
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const response = await axios.get(url, config);
+
+    return response.data;
+};
+const saveEpisode = async (token, newEpisode) => {
+
+    const url = `${process.env.API_URL}/api/episodes`;
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    try {
+        const envio = await axios.post(url, newEpisode, config);
+        console.log("Respuesta del servidor:", envio.data);
+
+        return true;
+
+    } catch (error) {
+        console.log("error al guardar el episodio");
+        if (error.response) {
+
+            console.error("Status:", error.response.status);
+            console.error("Datos del error:", error.response.data);
+        } else if (error.request) {
+
+            console.error("No hubo respuesta del servidor");
+        } else {
+
+            console.error("Error de configuración:", error.message);
+        }
+
+        throw error;
+    }
+
+};
+
+const deleteEpisode = async (token, id) => {
+    const url = `${process.env.API_URL}/api/episodes/${id}`;
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    try {
+
+        const respuestaDelete = await axios.delete(url, config);
+        //La respuesta de Axios va así. Siempre nos olvidamos:
+        // - respuestaDelete.status
+        // - respuestaDelete.data
+        console.log("estado backend " + respuestaDelete.status);
+       
+        if (respuestaDelete.status === 200) {
+            console.log("dentro del if");
+            console.log("mensaje backend->" + respuestaDelete.data.message);
+            return true;
+        } else { //puede ser que el capítulo no se borre y no se lance una excepción
+            console.log("mensaje backend->" + respuestaDelete.data.error);
+            return false;
+        }
+
+
+    } catch (error) {
+        console.log("Error en indexService:", error.message);
+        return false;
+    }
+}
+
+
+module.exports = {
+    getCharacters, getEpisodios, getCharactersWithPage, getEpisodiosWithId, getCharactersNameId, saveEpisode, deleteEpisode
+};

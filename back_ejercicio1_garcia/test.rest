@@ -1,0 +1,100 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjlhYWM1ODczMmYwOWMxZWE3YjE5N2JmIiwiaWF0IjoxNzc1NzE5ODkxLCJleHAiOjE3NzYzMjQ2OTF9.dTFUBbn7aZtfpPDsafo_fDnyxPH6TmZ9tLvUvKPdnwc
+
+GET http://localhost:3000/api/characters
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/api/characters?page=2&limit=2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+POST http://localhost:3000/api/characters
+Content-Type: application/json
+
+{
+    "name":"choso",
+    "age":120,
+    "species":"nisu",
+    "role":"maldicion"
+}
+
+###
+GET http://localhost:3000/api/characters/69a567446981aaac9b68c274
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+PUT http://localhost:3000/api/characters/69a567446981aaac9b68c26b
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name":"a",
+    "age":"ldfsd"
+}
+
+###
+DELETE http://localhost:3000/api/characters/69aaa54561a6f961b3a5ae79
+
+###
+GET http://localhost:3000/api/episodes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+POST http://localhost:3000/api/episodes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{   
+    "code": "S01E03",
+    "title": "Meowy's Whereabouts",
+    "summary": "Denji trabaja con Power, una Poseída impetuosa que le promete un favor especial si rescata a su gato de un demonio.",
+    "year": 2022,
+    "characters": ["69a567447981aaac9b68c26b", "69a567446981aaac9b68c26e", "69a567446981aaac9b68c26d", "69a567446981aaac9b68c277"]
+
+}
+
+###
+GET http://localhost:3000/api/episodes/69a572046981aaac9b68c27c
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+PUT http://localhost:3000/api/episodes/69aaa6e161a6f961b3a5ae81
+Content-Type: application/json
+
+{
+    "title":"prueba22221",
+    "code":"6666",
+    "summary":"NISU",
+    "year":2026
+}
+
+###
+DELETE http://localhost:3000/api/episodes/69aaa6e161a6f961b3a5ae81
+
+###
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "carmen",
+  "email": "carmen@gmail.com",
+  "password": "1234"
+}
+
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "carmen@gmail.com",
+  "password": "1234"
+}
+
