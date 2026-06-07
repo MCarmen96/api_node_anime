@@ -1,6 +1,5 @@
-[build]
+toml[build]
 builder = "nixpacks"
-buildCommand = "npm run build:css"
 
 [deploy]
 startCommand = "npm start"
